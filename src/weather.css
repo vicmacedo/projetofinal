@@ -1,0 +1,72 @@
+.city-name { /* nome da cidade no header */
+  font-size: 50px;
+  font-weight: bold;
+}
+.country-name { /* nome do país no header */
+  font-size: 40px;
+}
+.weather-climateinfo { /* texto de informação do clima */
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  gap: 5px; /* Espaçamento entre os itens */
+}
+.weather-climateinfo img { /* imagem da descrição do clima */
+  width: 80px; /* largura do ícone */
+  height: 80px; /* altura do ícone */
+}
+.weather-card-container { /* container dos cards */
+  display: flex;
+  flex-wrap: wrap; /* Permite quebra de linha se necessário */
+  justify-content: center; 
+  gap: 10px; /* Espaço entre os cards */
+  margin-top: 20px;
+}
+.weather-card { /* cards */
+  background-color: #f0f8ff; 
+  border: 1px solid #ddd;
+  border-radius: 8px; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra leve */
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 10px;
+  width: 18%; /* Largura fixa para os cards */
+}
+.weather-card img { /* imagens dos cards */
+  width: 100%; /* Largura fixa para as imagens */
+  height: 40%; /* Altura fixa para as imagens */
+  margin-top: 10px;
+}
+.weather-card img { /* imagens dos cards */
+  padding: 0px 0px 0px 0px;
+
+}
+.weather-card h3 { /* titulos dos cards */
+  display: flex;
+  align-items: center;
+  place-content: center;
+  font-size: 18px;
+  height: 45px;
+  margin-bottom: 10px;
+}
+.weather-card p { /* quebra de linha no card */
+  font-size: 15px;
+}
+.weather-card strong { /* texto negrito no card */
+  font-weight: bold;
+}
+@media (max-width: 900px) { /*media query em telas menores do que 900px*/
+  .weather-card {
+    width: 32%; /* Para telas menores, exibe 3 colunas */
+  }
+  .weather-card img {
+      width: 100px;
+      height: 100px;
+      margin-top: 10px;
+  }
+}
+@media (max-width: 600px) { /* media query em telas menores do que 600px */
+  .weather-card {
+    width: 100%; /* Para telas muito pequenas, empilha as colunas */
+  }
+}

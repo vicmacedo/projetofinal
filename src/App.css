@@ -1,0 +1,182 @@
+#root {/* controla todo o conteúdo exibido na página */
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.custom-container { /* container principal */
+  display: grid;
+  grid-template-columns: 1fr; /* Em telas pequenas, apenas uma coluna */
+  background-color: black;
+  align-items: stretch; 
+  height: 100%;
+  padding: 5px;
+
+}
+.custom-row { /* organiza o sub container dos elementos */
+  margin: 10px;
+  column-gap: 10px; /*espacamento entre colunas*/
+
+}
+.custom-header {
+  display: flex; /* Usando flexbox */
+  flex-direction: column; /* Alinha os itens na vertical */
+  align-items: center; /* Alinha os itens horizontalmente no centro */
+  justify-content: center; /* Alinha os itens verticalmente no centro */
+  background-color: white;
+}
+.custom-header p {
+  width: 50%;
+}
+.custom-col-left {
+  display: flex; /* Usando flexbox */
+  flex-direction: column; /* Alinha os itens na vertical */
+  align-items: center; /* Alinha os itens horizontalmente no centro */
+  justify-content: center; /* Alinha os itens verticalmente no centro */
+  background-color: white;
+  text-align: center; /* Centraliza o texto dentro dos parágrafos */
+  height: 100%; /* Garante que o container ocupe a altura total do seu pai */
+  max-width: 40%;
+  padding: 1rem; /* Adiciona algum espaçamento */
+}
+
+.custom-col-left p {
+  margin: 10px 0; /* Ajusta o espaçamento entre os parágrafos */
+}
+
+.custom-col-left button {
+  margin-top: 10px; /* Adiciona um pequeno espaço entre o botão e os parágrafos */
+}
+
+.custom-col-right {
+  background-color: white;
+  color: black;
+  max-width: 70%; /* Define a largura da segunda coluna como 30% */
+  padding: 10px;
+  border: none;
+}
+.custom-col-right-default {
+ height: 100%;
+}
+.custom-col-right-default img {
+  opacity: 0.5;
+  width:50%;
+  height: 80%
+}
+/* Barra de pesquisa */
+.search-bar-container {
+  display: flex;
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center; /* Centraliza verticalmente */
+  background-color: #f0f8ff;
+  border-radius: 30px;
+  padding: 5px; /* Adiciona um pequeno preenchimento para ajustar os elementos */
+  width: 90%; /* Garante que ocupe toda a largura disponível */
+  height: 60px;
+}
+/* Barra de pesquisa */
+.search-bar {
+  display: flex;
+  justify-content: space-between; /* Ajusta para distribuir espaço entre input e botão */
+  align-items: center; /* Centraliza verticalmente o conteúdo da barra */
+  background: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px; /* Limita a largura da barra para telas maiores */
+  padding: 10px;
+  border-radius: 30px;
+}
+
+/* Input de pesquisa */
+.search-input {
+  border: none;
+  outline: none;
+  font-size: 16px;
+  flex: 1; /* Ocupa o espaço disponível */
+  color: #333;
+  background: transparent;
+  margin-left: 10px;
+}
+
+/* Botão de busca */
+.search-button {
+  display: flex;
+  align-items: center; /* Garante o alinhamento vertical do botão */
+  background-color: #007bff; /* Cor de fundo */
+  color: white; /* Cor do texto */
+  border-radius: 30px;
+  padding: 10px 20px; /* Ajuste o padding para aumentar o botão se necessário*/
+  cursor: pointer; /* Mostra a mãozinha no hover */
+  font-size: 16px; /* Tamanho do texto */
+  transition: background-color 0.3s ease; /* Suaviza a transição */
+  margin-left: 10px; /* Se necessário, ajusta o espaçamento entre o input e o botão */
+  margin-right: 5px;
+  margin-bottom: 12px;
+}
+
+/* Efeito ao passar o mouse */
+.search-button:hover {
+  background-color: #0056b3; /* Cor mais escura no hover */
+}
+
+/* Efeito ao clicar */
+.search-button:active {
+  background-color: #003f7f;
+}
+
+/*button geolocalização */
+button.btn.btn-primary {
+  background-color: #007bff; /* Nova cor de fundo */
+  border: none; /* Remove borda */
+  border-radius: 30px; /* Cantos arredondados */
+  font-size: 16px; /* Tamanho do texto */
+  display: flex; /* Garante flexbox para alinhar o conteúdo */
+  justify-content: center; /* Alinha horizontalmente o conteúdo interno */
+  align-items: center; /* Alinha verticalmente o conteúdo interno */
+  width: 100%; /* Ajusta a largura para ocupar o espaço disponível */
+  max-width: 400px; /* Limita a largura máxima */
+  padding: 10px; /* Espaçamento interno */
+  transition: background-color 0.3s ease; /* Transição suave ao passar o mouse */
+}
+
+button.btn.btn-primary:hover {
+  background-color: #0056b3; /* Cor mais escura no hover */
+}
+
+button.btn.btn-primary:active {
+  background-color: #003f7f; /* Cor ainda mais escura ao clicar */
+}
+@media (max-width: 1200px) { /*media query */
+  .custom-container { /* faz com que o container vire colunas verticais */
+    flex-direction: column; 
+    align-items: baseline;
+    height: 100%;
+    width: 100%;
+  }
+  .custom-header { 
+    padding: 0px;
+  }
+  .custom-col-left { /* faz com que a coluna ocupe toda a largura */
+    max-width: 100%;
+    flex: 1 1 100%;
+    height: 100%;
+    padding: 10px;
+  }
+  .custom-col-right { /* faz com que a coluna ocupe toda a largura */
+    max-width: 100%;
+    flex: 1 1 100%;
+    height: 100%;
+    padding: 10px;
+}
+.search-bar-container {  /* faz com que a barra de pesquisa ocupe toda a largura */
+  display: flex; 
+  justify-content: center;
+  width: 100%;
+}
+.search-bar {
+  justify-content: center; 
+  align-items: center;
+}
+
+}
