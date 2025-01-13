@@ -31,7 +31,7 @@ async function fetchCityFromGeoNames(query) {
     } else {
       return null; // Nenhuma cidade encontrada
     }
-  } catch (error) {
+  } catch (error) { // Exibe mensagem de Erro referente à else
     console.error('Erro ao buscar cidade na API GeoNames:', error);
     return null;
   }
@@ -59,16 +59,17 @@ function MinimalSearchBar({ onSearch }) {
 
   return ( // Componentes da barra de pesquisa
     <div className="search-bar-container">
+
       <input
         type="text"
         placeholder="Digite estado, cidade ou município"
         className="search-input"
         value={query}
-        onChange={handleInputChange}
-      />
-      <button onClick={handleSearch} className="search-button">
+        onChange={handleInputChange}/>
+      <button onClick={handleSearch} className="search-button"> {/* Botão de busca */}
         Buscar
       </button>
+
     </div>
   );
 }
@@ -90,14 +91,14 @@ function ContainerFluidBreakpointExample() {
             const { name, adminName1, lat, lng } = response.data.geonames[0]; // Obtem as coordenadas e o nome da cidade
             setSelectedLocation({ cityName: name, state: adminName1, lat, lng });
           } else {
-            alert('Não foi possível encontrar sua localização.');
+            alert('Não foi possível encontrar sua localização.'); // Exibe mensagem de erro se nenhuma cidade foi encontrada
           }
         } catch (error) {
-          console.error('Erro ao buscar dados da localização:', error);
+          console.error('Erro ao buscar dados da localização:', error); // Exibe mensagem de erro ao buscar dados da localização
         }
       });
     } else {
-      alert('Geolocalização não suportada pelo navegador.');
+      alert('Geolocalização não suportada pelo navegador.'); // Exibe mensagem de erro se o navegador não suportar geolocalização
     }
   };
 
@@ -106,12 +107,9 @@ function ContainerFluidBreakpointExample() {
   };
 
   const handleModalAccept = () => {
-    setShowModal(false); // Fecha o modal
+    setShowModal(false); // Fecha o modal se o usuário aceitar
     fetchWeatherByLocation(); // Busca a localização
-  };
-
-  const handleModalCancel = () => {
-    setShowModal(false); // Fecha o modal
+  
   };
 
   const handleButtonClick = () => {
@@ -144,14 +142,20 @@ function ContainerFluidBreakpointExample() {
 
   return (
     <Container fluid="md" className="custom-container"> {/* Container fluido */}
+      
+      
       <Row className="custom-row"> {/* Aplica propriedades grid de organização aos componentes do layout */}
+        
         <Col className="custom-header"> {/* Header com título e texto */}
-          <h1>APLICAÇÃO METEOROLÓGICA</h1>
+          <h1>☀︎ APLICAÇÃO METEOROLÓGICA ☁︎</h1>
           <p>Encontre informações meteorológicas precisas e atualizadas para sua localização e qualquer lugar do mundo. Tenha acesso rápido às condições climáticas para planejar o seu dia com mais eficiência.</p>
         </Col>
+
       </Row>
 
+
       <Row className="custom-row">
+        
         <Col className="custom-col-left"> {/* Coluna da esquerda */}
           <p>Veja o clima em sua localização:</p>
           <Button variant="primary" onClick={handleButtonClick}>Buscar Clima pela Localização</Button> {/* Botão que abre o modal para permissão */}
@@ -159,21 +163,24 @@ function ContainerFluidBreakpointExample() {
           <MinimalSearchBar onSearch={handleSearch} /> {/* Barra de pesquisa para buscar informações por texto */}
         </Col>
 
+
         <Col className="custom-col-right"> {/* Coluna da direita */}
           {selectedLocation ? ( /* Se houver uma localização selecionada */
             <Weather location={selectedLocation} /> // Exibe diretamente o componente Weather
           ) : ( // Se não houver uma localização selecionada
             <Col className="custom-col-right-default">
               <h2>MAPA METEOROLÓGICO</h2>
+              <p>ㅤㅤ</p>
               <p>Escolha uma cidade ou use a localização atual para visualizar o clima.</p>
               <img src={`img/rotating_earth.gif`} alt="Globo Giratório"/>
             </Col>
           )}
         </Col>
+
       </Row>
 
       {/* Modal para confirmação de permissão de localização */}
-      <Modal show={showModal} onHide={handleModalCancel}>
+      <Modal show={showModal}>
         <Modal.Header closeButton>
           <Modal.Title>Permissão para Localização</Modal.Title>
         </Modal.Header>
@@ -184,6 +191,13 @@ function ContainerFluidBreakpointExample() {
           <Button variant="primary" className="custom-allow-button" onClick={handleModalAccept}>Permitir</Button>
         </Modal.Footer>
       </Modal>
+
+    {/* Rodapé */}
+    <footer className="footer">
+      <p>© 2025 Grupo 3 - Projeto Final - Senai Front End turma 2024-2. Todos os direitos reservados.</p>
+    </footer>
+
+
     </Container>
   );
 }

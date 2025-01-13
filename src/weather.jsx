@@ -27,7 +27,10 @@ const [weatherData, setWeatherData] = useState(null);
     fetchWeatherData();
   }, [location]);
 
-  if (!weatherData) { return <p>Carregando...</p>; } // mensagem de carregamento //
+  // Mensagem de Carregamento
+if (!weatherData) { 
+  return <p><img src={`./img/infoloading.gif`} alt="Carregando"/></p>; // 
+}
 
   // Aqui você usa o dicionário para substituir a sigla pelo nome completo do país //
   const countryCode = weatherData.sys?.country || "BR";
@@ -47,7 +50,7 @@ const [weatherData, setWeatherData] = useState(null);
 
       <div className="weather-climate-info"> {/* descrição climática */}
 
-        <h3><strong>{weatherData.weather[0].description}</strong></h3>
+        <h3>{weatherData.weather[0].description}</h3>
           <img src={`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}.png`} alt={weatherData.weather[0].description}/>
 
       </div>
@@ -57,8 +60,8 @@ const [weatherData, setWeatherData] = useState(null);
 
         <div className="weather-card"> {/* temperatura */}
           <h3>Temperatura</h3>
-            <p><strong>{weatherData.main.temp}°Cㅤㅤ</strong></p>
-              <img src={`/img/temperatura.png`} alt="Temperatura"/>
+            <p><strong>{weatherData.main.temp}°C</strong></p>
+          <img src={`/img/temperatura.png`} alt="Temperatura"/>
 
       </div>
 
@@ -66,10 +69,10 @@ const [weatherData, setWeatherData] = useState(null);
         <div className="weather-card"> {/* sensação térmica */}
 
           <h3>Sensação Térmica</h3>
-            <p><strong>{weatherData.main.feels_like}°Cㅤㅤ</strong></p>
-              {weatherData.main.temp < 10 && (<img src={`/img/tempb.png`} alt="Temperatura Baixa" />)}
-              {weatherData.main.temp >= 10 && weatherData.main.temp < 25 && (<img src={`/img/tempn.png`} alt="Temperatura Normal" />)}
-              {weatherData.main.temp >= 25 && (<img src={`/img/tempa.png`} alt="Temperatura Quente" />)}
+            <p><strong>{weatherData.main.feels_like}°C</strong></p>
+            {weatherData.main.temp < 10 && (<img src={`/img/tempb.png`} alt="Temperatura Baixa" />)}
+            {weatherData.main.temp >= 10 && weatherData.main.temp < 25 && (<img src={`/img/tempn.png`} alt="Temperatura Normal" />)}
+            {weatherData.main.temp >= 25 && (<img src={`/img/tempa.png`} alt="Temperatura Quente" />)}
 
         </div>
 
@@ -77,7 +80,7 @@ const [weatherData, setWeatherData] = useState(null);
         <div className="weather-card"> {/* umidade */}
           <h3>Umidade</h3>
             <p><strong>{weatherData.main.humidity}%</strong></p>
-            ㅤㅤ<img src={`/img/umidade.png`} alt="Umidade" />
+            <img src={`/img/umidade.png`} alt="Umidade" />
 
         </div>
 
@@ -86,9 +89,9 @@ const [weatherData, setWeatherData] = useState(null);
 
           <h3>Pressão Atmosférica</h3>
             <p><strong>{weatherData.main.pressure} hPa</strong></p>
-            ㅤㅤ{weatherData.main.pressure <= 990 && (<img src={`/img/atmbaixa.png`} alt="Pressão Baixa" />)}
-            ㅤㅤ{weatherData.main.pressure > 990 && weatherData.main.pressure <= 1030 && (<img src={`/img/atmnormal.png`} alt="Pressão Média" />)}
-            ㅤㅤ{weatherData.main.pressure > 1030 && (<img src={`/img/atmalta.png`} alt="Pressão Alta" />)}
+            {weatherData.main.pressure <= 990 && (<img src={`/img/atmbaixa.png`} alt="Pressão Baixa" />)}
+            {weatherData.main.pressure > 990 && weatherData.main.pressure <= 1030 && (<img src={`/img/atmnormal.png`} alt="Pressão Média" />)}
+            {weatherData.main.pressure > 1030 && (<img src={`/img/atmalta.png`} alt="Pressão Alta" />)}
 
         </div>
 
@@ -97,7 +100,7 @@ const [weatherData, setWeatherData] = useState(null);
 
           <h3>Velocidade do Vento</h3>
             <p><strong>{weatherData.wind.speed} m/s</strong></p>
-            ㅤㅤ<img src={`/img/velocidadedovento.png`} alt="Velocidade do Vento" />
+            <img src={`/img/velocidadedovento.png`} alt="Velocidade do Vento" />
 
         </div>
 

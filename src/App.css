@@ -35,10 +35,10 @@
 }
 .custom-header {
   display: flex; /* Usando flexbox */
-  flex-direction: column; /* Alinha os itens na vertical */
-  align-items: center; /* Alinha os itens horizontalmente no centro */
-  justify-content: center; /* Alinha os itens verticalmente no centro */
-
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center; 
+  margin-bottom: 50px;
 }
 .custom-header p {
   width: 50%;
@@ -48,15 +48,16 @@
   color: white;
 }
 .custom-col-left {
-  display: flex; /* Usando flexbox */
-  flex-direction: column; /* Alinha os itens na vertical */
-  align-items: center; /* Alinha os itens horizontalmente no centro */
-  justify-content: center; /* Alinha os itens verticalmente no centro */
-  text-align: center; /* Centraliza o texto dentro dos parágrafos */
+  display: flex; 
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center; 
+  text-align: center; 
   color: white;
-  height: 100%; /* Garante que o container ocupe a altura total do seu pai */
-  max-width: 40%;
-  padding: 1rem; /* Adiciona algum espaçamento */
+  height: 100%; 
+  min-height: 600px;
+  max-width: 30%; /* Define a largura da primeira coluna como 30% */
+  margin-top: -10px;
 }
 
 .custom-col-left p {
@@ -64,75 +65,88 @@
 }
 
 .custom-col-left button {
-  margin-top: 10px; /* Adiciona um pequeno espaço entre o botão e os parágrafos */
+  margin-top: 10px; 
 }
 
 .custom-col-right {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.9);
   border-radius: 30px;
-  max-width: 70%; /* Define a largura da segunda coluna como 30% */
-  padding: 10px;
+  max-width: 70%; /* Define a largura da segunda coluna como 70% */
+  padding: 40px;
   border: none;
+  margin-top: -10px;
 }
 .custom-col-right-default {
  height: 100%;
+ width: 100%;
+ padding: 18px 0px 0px 0px;
 }
 .custom-col-right-default img {
   opacity: 0.5;
-  width:50%;
-  height: 80%
+  width:67%;
+  height: 90%;
+}
+.custom-col-right-default h2 {
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  margin-top: -30px;
+  border-radius: 25px;
+}
+.custom-col-right-default p {
+  margin-bottom: -10px;
 }
 /* Botão de permissão */
 .custom-allow-button.btn.btn-primary {
   display: flex; /* Garante flexbox para alinhar o conteúdo */
-  justify-content: center; /* Alinha horizontalmente o conteúdo interno */
-  align-items: center; /* Alinha verticalmente o conteúdo interno */
-  width: 100%; /* Ajusta a largura para ocupar o espaço disponível */
-  background-color: #007bff; /* Cor de fundo personalizada */
-  color: white; /* Cor do texto */
-  font-size: 16px; /* Tamanho da fonte */
-  font-weight: bold; /* Negrito no texto */
-  border-radius: 30px; /* Cantos arredondados */
+  justify-content: center;
+  align-items: center; 
+  width: 100%;
+  background-color: #007bff; 
+  color: white; 
+  font-size: 16px; 
+  font-weight: bold; 
+  border-radius: 30px; 
   padding: 10px 20px; /* Espaçamento interno */
   width: 500px;
   transition: background-color 0.3s, transform 0.3s; /* Transição suave */
 }
 
 .custom-allow-button:hover {
-  background-color: #0056b3; /* Cor ao passar o mouse */
+  background-color: #0056b3; 
   transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
 }
 
 .custom-allow-button:active {
-  background-color: #003f7f; /* Cor ao clicar */
+  background-color: #003f7f; 
   transform: scale(0.95); /* Efeito de "pressionado" ao clicar */
 }
 .modal-footer {
   display: flex; /* Flexbox para centralização */
-  justify-content: center; /* Alinha o conteúdo horizontalmente */
-  align-items: center; /* Alinha o conteúdo verticalmente */
+  justify-content: center;
+  align-items: center; 
   gap: 10px; /* Espaçamento opcional entre elementos */
 }
 /* Barra de pesquisa */
 .search-bar-container {
   display: flex;
-  justify-content: center; /* Centraliza horizontalmente */
-  align-items: center; /* Centraliza verticalmente */
+  justify-content: center; 
+  align-items: center; 
   background-color: #f0f8ff;
   border-radius: 30px;
-  padding: 5px; /* Adiciona um pequeno preenchimento para ajustar os elementos */
-  width: 90%; /* Garante que ocupe toda a largura disponível */
+  padding: 5px; 
+  width: 100%; 
   height: 60px;
 }
 /* Barra de pesquisa */
 .search-bar {
   display: flex;
-  justify-content: space-between; /* Ajusta para distribuir espaço entre input e botão */
-  align-items: center; /* Centraliza verticalmente o conteúdo da barra */
+  justify-content: space-between; 
+  align-items: center; 
   background: #fff;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 400px; /* Limita a largura da barra para telas maiores */
+  margin: 10px;
   padding: 10px;
   border-radius: 30px;
 }
@@ -152,21 +166,21 @@
 .search-button {
   display: flex;
   align-items: center; /* Garante o alinhamento vertical do botão */
-  background-color: #007bff; /* Cor de fundo */
-  color: white; /* Cor do texto */
+  background-color: #007bff; 
+  color: white; 
   border-radius: 30px;
-  padding: 10px 20px; /* Ajuste o padding para aumentar o botão se necessário*/
+  padding: 10px;
   cursor: pointer; /* Mostra a mãozinha no hover */
-  font-size: 16px; /* Tamanho do texto */
-  transition: background-color 0.3s ease; /* Suaviza a transição */
-  margin-left: 10px; /* Se necessário, ajusta o espaçamento entre o input e o botão */
+  font-size: 16px; 
+  margin-left: 10px;
   margin-right: 5px;
   margin-bottom: 12px;
+  transition: background-color 0.3s ease; /* Suaviza a transição */
 }
 
 /* Efeito ao passar o mouse */
 .search-button:hover {
-  background-color: #0056b3; /* Cor mais escura no hover */
+  background-color: #0056b3; 
   transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
 }
 
@@ -181,27 +195,34 @@ button.btn.btn-primary {
   display: flex; /* Garante flexbox para alinhar o conteúdo */
   justify-content: center; /* Alinha horizontalmente o conteúdo interno */
   align-items: center; /* Alinha verticalmente o conteúdo interno */
-  background-color: #007bff; /* Nova cor de fundo */
-  border: none; /* Remove borda */
-  border-radius: 30px; /* Cantos arredondados */
-  font-size: 16px; /* Tamanho do texto */
-  font-weight: bold; /* Negrito no texto */
-  width: 100%; /* Ajusta a largura para ocupar o espaço disponível */
-  max-width: 400px; /* Limita a largura máxima */
-  padding: 10px; /* Espaçamento interno */
+  background-color: #007bff; 
+  border: none; 
+  border-radius: 30px; 
+  font-size: 16px;
+  font-weight: bold; 
+  width: 100%;
+  max-width: 400px;
+  padding: 15px; 
   transition: background-color 0.3s ease; /* Transição suave ao passar o mouse */
 }
 
 button.btn.btn-primary:hover {
-  background-color: #0056b3; /* Cor mais escura no hover */
+  background-color: #0056b3;
   transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
 
 }
 
 button.btn.btn-primary:active {
-  background-color: #003f7f; /* Cor ainda mais escura ao clicar */
+  background-color: #003f7f; 
   transform: scale(0.95); /* Efeito de "pressionado" ao clicar */
 
+}
+.footer {
+  width: 100; /* Ocupa toda a largura da janela */
+  padding-top: 20px;
+}
+.footer p {
+  color: white;
 }
 @media (max-width: 1200px) { /*media query */
   .custom-container { /* faz com que o container vire colunas verticais */
@@ -212,31 +233,90 @@ button.btn.btn-primary:active {
   }
   .custom-header { 
     padding: 0px;
+    margin: 0px;
+  }
+  .custom-header p{
+    width: 80%;
   }
   .custom-col-left { /* faz com que a coluna ocupe toda a largura */
     max-width: 100%;
     flex: 1 1 100%;
     height: 100%;
     padding: 10px;
+    margin-top: -230px;
+    margin-bottom: -150px;
   }
   .custom-col-right { /* faz com que a coluna ocupe toda a largura */
     max-width: 100%;
     flex: 1 1 100%;
     height: 100%;
     padding: 10px;
-}
-.search-bar-container {  /* faz com que a barra de pesquisa ocupe toda a largura */
-  display: flex; 
-  justify-content: center;
-  width: 100%;
-}
-.search-bar {
-  justify-content: center; 
-  align-items: center;
+  }
+  .custom-col-right-default h2 {
+    margin-top: 0px;
+  }
+  .footer {
+    width: 100; /* Ocupa toda a largura da janela */
+    margin-bottom: -30px;
+  }
+  .footer p {
+    padding-top: 10px;
+  }
+  .search-bar-container {  /* faz com que a barra de pesquisa ocupe toda a largura */
+    display: flex; 
+    justify-content: center;
+    width: 60%;
+  }
+  .search-bar {
+    justify-content: center; 
+    align-items: center;
 }
 }
 @media (max-width: 600px) { /*media query */
-.custom-header p {
-  width: 100%;
-}  
+    .custom-header {
+    padding: 0;
+    margin-top: -40px;
+  }
+  .custom-header p {
+    width: 100%;
+    margin-bottom: -120px;
+  }  
+  .custom-container {
+    flex-direction: column;
+    align-items: stretch; /* Alinha o conteúdo para ocupar toda a largura */
+    height: auto; /* Remove altura fixa */
+    width: 100%;
+    padding: 0; 
+  }
+  .custom-col-left,
+  .custom-col-right {
+    max-width: 100%; 
+    flex: 1 1 100%; /* Faz com que as colunas se ajustem em 100% */
+    height: auto; /* Ajuste a altura para o conteúdo */
+    padding: 10px; 
+    margin-top: -100px;
+    margin-bottom: -30px;
+  }
+  .custom-col-right-default img {
+    opacity: 0.5;
+    width:50%;
+    height: 70%;
+    padding-bottom: 25px;
+  }
+  .search-bar-container {
+    width: 100%; 
+    padding: 5px 0; /* Ajusta o espaçamento interno para não sobrecarregar */
+    margin-bottom: -60px;
+  }
+  .search-bar {
+    width: 100%;
+    padding: 10px 0;
+  }
+  .footer {
+    width: 100;
+    margin-bottom: -30px;
+  }
+  .footer p {
+    padding-top: 10px;
+  }
 }
