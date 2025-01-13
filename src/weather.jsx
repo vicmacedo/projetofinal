@@ -37,7 +37,7 @@ const [weatherData, setWeatherData] = useState(null);
     // informações climáticas do card //
     <div className="weather-info">
 
-      <div className="weather-location-info"> `{/* Informações da localização */}
+      <div className="weather-location-info">{/* Informações da localização */}
 
         <h3>{`${countryName}`}</h3> 
           <h2>{`${location.cityName}, ${location.state}`}</h2>

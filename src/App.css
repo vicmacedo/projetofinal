@@ -4,38 +4,56 @@
   padding: 2rem;
   text-align: center;
 }
-
+/* planosde fundo */
+.bg-dawn {/* Estilo para o plano de fundo do amanhecer */
+  background: url('./img/morning.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+.bg-day {/* Estilo para o plano de fundo do dia */
+  background: url('./img/afternoon.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+.bg-dusk {/* Estilo para o plano de fundo do anoitecer */
+  background: url('./img/evening.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+.bg-night {/* Estilo para o plano de fundo da noite */
+  background: url('./img/night.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+/* body */
 .custom-container { /* container principal */
   display: grid;
   grid-template-columns: 1fr; /* Em telas pequenas, apenas uma coluna */
-  background-color: black;
   align-items: stretch; 
   height: 100%;
   padding: 5px;
-
 }
 .custom-row { /* organiza o sub container dos elementos */
   margin: 10px;
   column-gap: 10px; /*espacamento entre colunas*/
-
 }
 .custom-header {
   display: flex; /* Usando flexbox */
   flex-direction: column; /* Alinha os itens na vertical */
   align-items: center; /* Alinha os itens horizontalmente no centro */
   justify-content: center; /* Alinha os itens verticalmente no centro */
-  background-color: white;
+
 }
 .custom-header p {
   width: 50%;
+  color: white;
+}
+.custom-header h1 {
+  color: white;
 }
 .custom-col-left {
   display: flex; /* Usando flexbox */
   flex-direction: column; /* Alinha os itens na vertical */
   align-items: center; /* Alinha os itens horizontalmente no centro */
   justify-content: center; /* Alinha os itens verticalmente no centro */
-  background-color: white;
   text-align: center; /* Centraliza o texto dentro dos parágrafos */
+  color: white;
   height: 100%; /* Garante que o container ocupe a altura total do seu pai */
   max-width: 40%;
   padding: 1rem; /* Adiciona algum espaçamento */
@@ -51,7 +69,7 @@
 
 .custom-col-right {
   background-color: white;
-  color: black;
+  border-radius: 30px;
   max-width: 70%; /* Define a largura da segunda coluna como 30% */
   padding: 10px;
   border: none;
@@ -63,6 +81,37 @@
   opacity: 0.5;
   width:50%;
   height: 80%
+}
+/* Botão de permissão */
+.custom-allow-button.btn.btn-primary {
+  display: flex; /* Garante flexbox para alinhar o conteúdo */
+  justify-content: center; /* Alinha horizontalmente o conteúdo interno */
+  align-items: center; /* Alinha verticalmente o conteúdo interno */
+  width: 100%; /* Ajusta a largura para ocupar o espaço disponível */
+  background-color: #007bff; /* Cor de fundo personalizada */
+  color: white; /* Cor do texto */
+  font-size: 16px; /* Tamanho da fonte */
+  font-weight: bold; /* Negrito no texto */
+  border-radius: 30px; /* Cantos arredondados */
+  padding: 10px 20px; /* Espaçamento interno */
+  width: 500px;
+  transition: background-color 0.3s, transform 0.3s; /* Transição suave */
+}
+
+.custom-allow-button:hover {
+  background-color: #0056b3; /* Cor ao passar o mouse */
+  transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
+}
+
+.custom-allow-button:active {
+  background-color: #003f7f; /* Cor ao clicar */
+  transform: scale(0.95); /* Efeito de "pressionado" ao clicar */
+}
+.modal-footer {
+  display: flex; /* Flexbox para centralização */
+  justify-content: center; /* Alinha o conteúdo horizontalmente */
+  align-items: center; /* Alinha o conteúdo verticalmente */
+  gap: 10px; /* Espaçamento opcional entre elementos */
 }
 /* Barra de pesquisa */
 .search-bar-container {
@@ -118,22 +167,25 @@
 /* Efeito ao passar o mouse */
 .search-button:hover {
   background-color: #0056b3; /* Cor mais escura no hover */
+  transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
 }
 
 /* Efeito ao clicar */
 .search-button:active {
   background-color: #003f7f;
+    transform: scale(0.95); /* Efeito de "pressionado" ao clicar */
 }
 
 /*button geolocalização */
 button.btn.btn-primary {
+  display: flex; /* Garante flexbox para alinhar o conteúdo */
+  justify-content: center; /* Alinha horizontalmente o conteúdo interno */
+  align-items: center; /* Alinha verticalmente o conteúdo interno */
   background-color: #007bff; /* Nova cor de fundo */
   border: none; /* Remove borda */
   border-radius: 30px; /* Cantos arredondados */
   font-size: 16px; /* Tamanho do texto */
-  display: flex; /* Garante flexbox para alinhar o conteúdo */
-  justify-content: center; /* Alinha horizontalmente o conteúdo interno */
-  align-items: center; /* Alinha verticalmente o conteúdo interno */
+  font-weight: bold; /* Negrito no texto */
   width: 100%; /* Ajusta a largura para ocupar o espaço disponível */
   max-width: 400px; /* Limita a largura máxima */
   padding: 10px; /* Espaçamento interno */
@@ -142,10 +194,14 @@ button.btn.btn-primary {
 
 button.btn.btn-primary:hover {
   background-color: #0056b3; /* Cor mais escura no hover */
+  transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
+
 }
 
 button.btn.btn-primary:active {
   background-color: #003f7f; /* Cor ainda mais escura ao clicar */
+  transform: scale(0.95); /* Efeito de "pressionado" ao clicar */
+
 }
 @media (max-width: 1200px) { /*media query */
   .custom-container { /* faz com que o container vire colunas verticais */
@@ -178,5 +234,9 @@ button.btn.btn-primary:active {
   justify-content: center; 
   align-items: center;
 }
-
+}
+@media (max-width: 600px) { /*media query */
+.custom-header p {
+  width: 100%;
+}  
 }

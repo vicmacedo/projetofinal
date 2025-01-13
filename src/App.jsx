@@ -1,62 +1,63 @@
-// importações //
+// importações
 import { useState } from 'react'; // react
 import 'bootstrap/dist/css/bootstrap.min.css'; // bootstrap
 import Container from 'react-bootstrap/Container'; // bootstrap container
 import Button from 'react-bootstrap/Button'; // bootstrap button
+import Modal from 'react-bootstrap/Modal'; // bootstrap modal para popup
 import Row from 'react-bootstrap/Row'; // bootstrap row
 import Col from 'react-bootstrap/Col'; // bootstrap col
 import Weather from './weather'; // componente weather
 import './App.css'; // css
-import axios from 'axios'; // biblioteca axios para fazer requisições HTTP (api) //
+import axios from 'axios'; // biblioteca axios para fazer requisições HTTP (api)
 
-// Configuração da API GeoNames //
+// Configuração da API GeoNames
 const GEO_API_USERNAME = 'vicmacedo'; // username do GeoNames
 
-// Função para buscar coordenadas no GeoNames //
-const fetchCityFromGeoNames = async (cityQuery) => {
+// Função para buscar cidade na API GeoNames
+async function fetchCityFromGeoNames(query) {
+  try {
+    const response = await axios.get(
+      `https://secure.geonames.org/searchJSON?q=${query}&maxRows=1&username=${GEO_API_USERNAME}`
+    );
 
-  const url = `https://secure.geonames.org/searchJSON?q=${cityQuery}&maxRows=1&username=${GEO_API_USERNAME}`;
-    try {
-      const response = await axios.get(url);
-
-    if (response.data.geonames && response.data.geonames.length > 0) { // verifica se foram encontradas cidades
-      const { lat, lng, name, adminName1 } = response.data.geonames[0]; // obtem as coordenadas e o nome da cidade
-        return { lat, lng, cityName: name, state: adminName1 };
-    } 
-    
-    else { // se nao foram encontradas cidades
-      return null;
+    if (response.data.geonames && response.data.geonames.length > 0) {
+      const cityData = response.data.geonames[0]; // Primeiro resultado encontrado
+      return {
+        cityName: cityData.name,
+        state: cityData.adminName1,
+        lat: cityData.lat,
+        lng: cityData.lng,
+      };
+    } else {
+      return null; // Nenhuma cidade encontrada
     }
-  
-      // exibe erros ao buscar cidade no GeoNames  //
-    } catch (error) {
-      console.error('Erro ao buscar cidade no GeoNames:', error);
-        return null;
-    }
-};
+  } catch (error) {
+    console.error('Erro ao buscar cidade na API GeoNames:', error);
+    return null;
+  }
+}
 
-// Barra de Pesquisa //
+// Barra de Pesquisa
 function MinimalSearchBar({ onSearch }) {
-  const [query, setQuery] = useState(''); //Gerencia o texto digitado pelo usuário no campo de pesquisa
+  const [query, setQuery] = useState(''); // Gerencia o texto digitado pelo usuário no campo de pesquisa
 
-  const handleInputChange = (e) => { // gerencia o texto digitado pelo usuário
-    setQuery(e.target.value);
+  const handleInputChange = (e) => {
+    setQuery(e.target.value); // Gerencia o texto digitado pelo usuário
   };
 
-  const handleSearch = async () => { //faz a busca usando a função fetchCityFromGeoNames
+  const handleSearch = async () => { // Faz a busca usando a função fetchCityFromGeoNames
     if (query) {
-      const result = await fetchCityFromGeoNames(query); // busca a cidade
+      const result = await fetchCityFromGeoNames(query); // Busca a cidade
     
-      if (result) { // se a cidade foi encontrada
-        onSearch(result); // chama a função de busca passando o resultado
-
-      } else { // se a cidade nao foi encontrada
-        alert('Localização não encontrada. Verifique o nome e tente novamente.'); // exibe mensagem de erro
+      if (result) {
+        onSearch(result); // Chama a função de busca passando o resultado
+      } else {
+        alert('Localização não encontrada. Verifique o nome e tente novamente.'); // Exibe mensagem de erro
       }
     }
   };
 
-  return ( // componentes da barra de pesquisa
+  return ( // Componentes da barra de pesquisa
     <div className="search-bar-container">
       <input
         type="text"
@@ -72,78 +73,117 @@ function MinimalSearchBar({ onSearch }) {
   );
 }
 
-// Componente Principal //
-function ContainerFluidBreakpointExample() { // container
+// Componente Principal
+function ContainerFluidBreakpointExample() {
   const [selectedLocation, setSelectedLocation] = useState(null); // Gerencia a localização selecionada
+  const [showModal, setShowModal] = useState(false); // Gerencia a exibição do modal
 
-  const fetchWeatherByLocation = async () => { // busca o clima pela localização através do navegador
-    if (navigator.geolocation) { // verifica se o navegador suporta geolocalização
+  const fetchWeatherByLocation = async () => { // Busca o clima pela localização através do navegador
+    if (navigator.geolocation) { // Verifica se o navegador suporta geolocalização
       navigator.geolocation.getCurrentPosition(async (position) => {
-
         const { latitude, longitude } = position.coords;
-        try { // busca o clima pela localização
+        try {
           const response = await axios.get(
             `https://secure.geonames.org/findNearbyPlaceNameJSON?lat=${latitude}&lng=${longitude}&username=${GEO_API_USERNAME}`
           );
-          if (response.data.geonames && response.data.geonames.length > 0) { // verifica se foram encontradas cidades
-
-            const { name, adminName1, lat, lng } = response.data.geonames[0]; // obtem as coordenadas e o nome da cidade
+          if (response.data.geonames && response.data.geonames.length > 0) { // Verifica se foram encontradas cidades
+            const { name, adminName1, lat, lng } = response.data.geonames[0]; // Obtem as coordenadas e o nome da cidade
             setSelectedLocation({ cityName: name, state: adminName1, lat, lng });
-
-          } else { // se nao foram encontradas cidades
-            alert('Não foi possível encontrar sua localização.'); // exibe mensagem de erro
+          } else {
+            alert('Não foi possível encontrar sua localização.');
           }
-        } catch (error) { // exibe erros ao buscar dados da localização
+        } catch (error) {
           console.error('Erro ao buscar dados da localização:', error);
         }
       });
-
-    } else { // se o navegador nao suportar geolocalização
-      alert('Geolocalização não suportada pelo navegador.'); // exibe mensagem de erro
+    } else {
+      alert('Geolocalização não suportada pelo navegador.');
     }
   };
 
-  // Função para lidar com a pesquisa
-  const handleSearch = (location) => { // recebe o resultado da busca
-    setSelectedLocation(location); // atualiza a localização selecionada
+  const handleSearch = (location) => {
+    setSelectedLocation(location); // Atualiza a localização selecionada
   };
 
-  return ( // componentes do container
-    <Container fluid="md" className="custom-container"> {/* Container fluido */} 
+  const handleModalAccept = () => {
+    setShowModal(false); // Fecha o modal
+    fetchWeatherByLocation(); // Busca a localização
+  };
 
-      <Row className="custom-row"> {/* aplica propriedades grid de organização aos componentes do layout */}
-        <Col className="custom-header"> {/* header com título e texto */}
-          <h1>SITE METEOROLÓGICO</h1>
-            <p>Encontre informações meteorológicas precisas e atualizadas para sua localização e qualquer lugar do mundo. Tenha acesso rápido às condições climáticas para planejar o seu dia com mais eficiência.</p>
+  const handleModalCancel = () => {
+    setShowModal(false); // Fecha o modal
+  };
+
+  const handleButtonClick = () => {
+    setShowModal(true); // Exibe o modal quando o botão é clicado
+  };
+
+  // Função para determinar o plano de fundo com base no horário
+  function setDynamicBackground() {
+    const currentHour = new Date().getHours(); // Obtendo o horário atual
+    const bodyElement = document.body; // Elemento do corpo da página
+
+    bodyElement.classList.remove('bg-day', 'bg-night', 'bg-dawn', 'bg-dusk'); // Removendo qualquer classe de plano de fundo previamente aplicada
+
+    if (currentHour >= 5 && currentHour < 7) {
+      bodyElement.classList.add('bg-dawn'); // Amanhecer: 5h às 7h
+    } else if (currentHour >= 7 && currentHour < 16) {
+      bodyElement.classList.add('bg-day'); // Dia: 7h às 16h
+    } else if (currentHour >= 16 && currentHour < 19) {
+      bodyElement.classList.add('bg-dusk'); // Anoitecer: 16h às 19h
+    } else {
+      bodyElement.classList.add('bg-night'); // Noite: 19h às 5h
+    }
+  }
+
+  // Chamando a função para definir o plano de fundo inicial
+  setDynamicBackground();
+
+  // Atualizando o plano de fundo a cada hora
+  setInterval(setDynamicBackground, 3600000); // Atualiza a cada 1 hora (3600000ms)
+
+  return (
+    <Container fluid="md" className="custom-container"> {/* Container fluido */}
+      <Row className="custom-row"> {/* Aplica propriedades grid de organização aos componentes do layout */}
+        <Col className="custom-header"> {/* Header com título e texto */}
+          <h1>APLICAÇÃO METEOROLÓGICA</h1>
+          <p>Encontre informações meteorológicas precisas e atualizadas para sua localização e qualquer lugar do mundo. Tenha acesso rápido às condições climáticas para planejar o seu dia com mais eficiência.</p>
         </Col>
       </Row>
-      
 
-      <Row className="custom-row"> 
-        <Col className="custom-col-left"> {/* coluna da esquerda  */}
-        <p>Veja o clima em sua localização:</p>
-          <Button variant="primary" onClick={fetchWeatherByLocation}> Buscar Clima pela Localização </Button> {/* botão para buscar informações pela localização do usuário  */}
-            <p>Ou use a barra de pesquisas para monitorar o clima em qualquer lugar do mundo:</p>
-          <MinimalSearchBar onSearch={handleSearch} /> {/* barra de pesquisa para buscar informações por texto */}
+      <Row className="custom-row">
+        <Col className="custom-col-left"> {/* Coluna da esquerda */}
+          <p>Veja o clima em sua localização:</p>
+          <Button variant="primary" onClick={handleButtonClick}>Buscar Clima pela Localização</Button> {/* Botão que abre o modal para permissão */}
+          <p>Ou use a barra de pesquisas para monitorar o clima em qualquer lugar do mundo:</p>
+          <MinimalSearchBar onSearch={handleSearch} /> {/* Barra de pesquisa para buscar informações por texto */}
         </Col>
 
-
-        <Col className="custom-col-right"> {/* coluna da direita  */}
-
-          {selectedLocation ? ( /* se houver uma localização selecionada  */
+        <Col className="custom-col-right"> {/* Coluna da direita */}
+          {selectedLocation ? ( /* Se houver uma localização selecionada */
             <Weather location={selectedLocation} /> // Exibe diretamente o componente Weather
-
-          ) : ( // se nao houver uma localização selecionada
-
-            <Col className="custom-col-right-default"> {/* coluna da direita default  */}
+          ) : ( // Se não houver uma localização selecionada
+            <Col className="custom-col-right-default">
               <h2>MAPA METEOROLÓGICO</h2>
               <p>Escolha uma cidade ou use a localização atual para visualizar o clima.</p>
-              <img src={`img/rotating_earth.gif`} alt="Globo Giratório"/></Col>
+              <img src={`img/rotating_earth.gif`} alt="Globo Giratório"/>
+            </Col>
           )}
         </Col>
-
       </Row>
-      
+
+      {/* Modal para confirmação de permissão de localização */}
+      <Modal show={showModal} onHide={handleModalCancel}>
+        <Modal.Header closeButton>
+          <Modal.Title>Permissão para Localização</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Deseja permitir que suas informações de localização atuais sejam usadas para buscar o clima?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" className="custom-allow-button" onClick={handleModalAccept}>Permitir</Button>
+        </Modal.Footer>
+      </Modal>
     </Container>
   );
 }
